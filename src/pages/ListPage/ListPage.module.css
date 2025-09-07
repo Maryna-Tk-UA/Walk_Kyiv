@@ -1,0 +1,11 @@
+.listPageUl {
+    list-style: none;
+    padding: 0;
+}
+
+.listPageLi {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    border: 1px solid #000;
+    border-radius: 8px;
+}

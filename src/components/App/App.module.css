@@ -1,0 +1,10 @@
+.app {
+  padding: 0 16px;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+main {
+  min-height: 0;
+}
