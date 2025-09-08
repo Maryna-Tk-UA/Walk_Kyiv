@@ -5,6 +5,7 @@ import './index.css'
 import "modern-normalize";
 import App from '@/components/App/App';
 import { BrowserRouter } from 'react-router-dom';
+import PlacesProvider from './context/PlacesProvider';
 
 
 // const router = createBrowserRouter([
@@ -24,7 +25,9 @@ import { BrowserRouter } from 'react-router-dom';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <PlacesProvider>
+        <App />
+      </PlacesProvider>
     </BrowserRouter>
   </StrictMode>,
 )

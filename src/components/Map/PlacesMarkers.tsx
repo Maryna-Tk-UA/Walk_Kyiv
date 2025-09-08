@@ -3,12 +3,15 @@ import { seedPlaces } from "@/data/seed"
 import { categoryIcons } from "@/lib/mapIcons"
 import { useLocation, useNavigate, type Location } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { usePlaces } from "@/context/usePlaces";
+import css from './PlacesMarkers.module.css'
 
 interface MapLocationState {
   placeId?: string;
 }
 
 export default function PlacesMarkers() {
+  const {places, removePlace} = usePlaces();
 
   const map = useMap(); // хук з react-leaflet. Керую картою прямо з коду
   const location = useLocation() as Location & { state: MapLocationState }; 
@@ -52,7 +55,7 @@ useEffect(() => {
 
   return (
     <> 
-      {seedPlaces.map((place) => {
+      {places.map((place) => {
         const icon = categoryIcons[place.category];
 
         return (
@@ -66,6 +69,13 @@ useEffect(() => {
               <strong>{place.title}</strong>
               <br />
               {place.description}
+              <div className={css.buttonWrap}>
+                <button
+                  onClick={() => removePlace(place.id)}
+                  >
+                    Видалити
+                  </button>
+              </div>
             </Popup>
           </Marker>
         )

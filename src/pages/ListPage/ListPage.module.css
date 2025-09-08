@@ -25,6 +25,27 @@
     text-transform: capitalize;
 }
 
+.btnGoToMap {
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btnDeletePlace {
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.noPlace {
+    color: #777;
+}
+
 /* .nature {
     background-color: #3c833c;
 }

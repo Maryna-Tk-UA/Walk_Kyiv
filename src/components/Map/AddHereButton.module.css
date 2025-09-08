@@ -1,0 +1,12 @@
+.btnGetCenter {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 999px;
+    border: none;
+    background-color: #1976d2;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    z-index: 1000;
+}

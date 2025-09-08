@@ -1,8 +1,14 @@
+import { useState } from "react"
 import MapContainerWrapper from "./MapContainerWrapper"
 import PlacesMarkers from "./PlacesMarkers"
 import TileLayerOSM from "./TileLayerOSM"
+import MapPickClick from "./MapPickClick";
+import AddHereButton from "./AddHereButton";
+import AddPlaceModal from "@/pages/AddPlace/AddPlaceModal";
+
 
 export default function MapPage() {
+  const [draftCoords, setDraftCoords] = useState<{lat: number; lng: number} | null>(null);
 
     const center: [number, number] = [50.45, 30.52]
 
@@ -11,7 +17,15 @@ export default function MapPage() {
       <MapContainerWrapper center={center}>
         <TileLayerOSM />
         <PlacesMarkers />
+        <MapPickClick onPick={(ll) => setDraftCoords(ll)} />
+        <AddHereButton onPick={(ll) => setDraftCoords(ll)} />
       </MapContainerWrapper>
+      {draftCoords && (
+        <AddPlaceModal
+          coords={draftCoords}
+          onClose={() => setDraftCoords(null)}
+         />
+      )}
     </div>
   )
 }

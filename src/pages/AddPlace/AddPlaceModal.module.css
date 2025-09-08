@@ -1,0 +1,15 @@
+.formAddPlace {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.divCoords {
+    display: flex;
+}
+
+.actionsBtnGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

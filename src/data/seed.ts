@@ -1,11 +1,10 @@
 import type { Place } from "../types";
-import { v4 as uuidv4 } from "uuid"
 
 export const seedPlaces: Place[] = [
     { 
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     title: "Парк Перемоги",
-    coords: { lat: 50.452, lng: 30.613 },
+    coords: { lat: 50.4615, lng: 30.604 },
     category: "nature",
     tags: ["park", "water", "photo"],
     district: "Дніпровський",
@@ -15,7 +14,7 @@ export const seedPlaces: Place[] = [
     createdAt: new Date().toISOString()
 },
     {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     title: "Русанівська набережна",
     coords: { lat: 50.442, lng: 30.59 },
     category: "view",
