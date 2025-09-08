@@ -1,11 +1,35 @@
+.page {
+    padding: 1rem;
+}
+
 .listPageUl {
     list-style: none;
     padding: 0;
 }
 
 .listPageLi {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1em;
     padding: 0.5em;
     border: 1px solid #000;
     border-radius: 8px;
 }
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+    font-size: 0.8rem;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+/* .nature {
+    background-color: #3c833c;
+}
+
+.view {
+    background-color: #282892;
+} */
+

@@ -1,4 +1,20 @@
-export type Category = 'nature' | 'modern' | 'kids' | 'view' | 'monument' | 'shopping';
+import { categoryIcons } from "@/lib/mapIcons";
+
+export type Category = 'nature' | 'view' | 'kids' | 'modern' | 'monument' | 'shopping' | 'default';
+
+// Record<string, string> - я створюю новий дженерік-тип, де ключ- Category, значення - рядок 
+export const categoryColors: Record<Category, string> = {
+  nature: "#61c261",
+  view: "#4f4fef",
+  default: "#626262",
+  monument: "#141414",
+  kids: "#7b0b0b",
+  modern: "#8a2586",
+  shopping: "#e3e326"
+}
+
+export const getCategoryColor = (c: Category) => categoryColors[c];
+export const getCategoryIcon = (c: Category) => categoryIcons[c];
 
 export type Tag = 'park' | 'water' | 'embankment' | 'bridge' | 'art' | 'playground' | 'mall' | 'island' | 'forest' | 'sport' | 'photo';
 

@@ -17,7 +17,7 @@ export const seedPlaces: Place[] = [
     {
     id: uuidv4(),
     title: "Русанівська набережна",
-    coords: { lat: 50.444, lng: 30.585 },
+    coords: { lat: 50.442, lng: 30.59 },
     category: "view",
     tags: ["embankment", "water", "photo"],
     district: "Дніпровський",
