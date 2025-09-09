@@ -1,28 +1,33 @@
-import { Marker, Popup, useMap } from "react-leaflet"
-import { seedPlaces } from "@/data/seed"
-import { categoryIcons } from "@/lib/mapIcons"
+import { Marker, Popup, useMap } from "react-leaflet";
+import { seedPlaces } from "@/data/seed";
+import { categoryIcons } from "@/lib/mapIcons";
 import { useLocation, useNavigate, type Location } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePlaces } from "@/context/usePlaces";
-import css from './PlacesMarkers.module.css'
+import css from "./PlacesMarkers.module.css";
+import type { Place } from "@/types";
+import EditPlaceModal from "@/pages/EditPlace/EditPlaceModal";
+import ConfirmModal from "../ui/ConfirmModal/ConfirmModal";
 
 interface MapLocationState {
   placeId?: string;
 }
 
 export default function PlacesMarkers() {
-  const {places, removePlace} = usePlaces();
+  const { places, removePlace, toggleFavorite } = usePlaces();
+  const [editing, setEditing] = useState<Place | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   const map = useMap(); // хук з react-leaflet. Керую картою прямо з коду
-  const location = useLocation() as Location & { state: MapLocationState }; 
+  const location = useLocation() as Location & { state: MapLocationState };
   // задала йому свій state у:
   // interface Location {
-//   pathname: string;
-//   search: string;
-//   hash: string;
-//   state: unknown;  // <-- ось тут проблема
-//   key: string;
-// }
+  //   pathname: string;
+  //   search: string;
+  //   hash: string;
+  //   state: unknown;  // <-- ось тут проблема
+  //   key: string;
+  // }
   // useLocation() - хук з react-router-dom. дає доступ до url
   const navigate = useNavigate(); // хук з react-router-dom. для переходу на інший маршрут, при кліку
 
@@ -31,30 +36,36 @@ export default function PlacesMarkers() {
   // тут зберігатиму всі посилання на маркери за їх id:
   const markerRefs = useRef<Record<string, L.Marker | null>>({});
 
-useEffect(() => {
-  if (!placeId) return;
+  useEffect(
+    () => {
+      if (!placeId) return;
 
-  const place = seedPlaces.find(p => p.id === placeId);
-  const marker = place ? markerRefs.current[placeId] : null;
+      const place = seedPlaces.find((p) => p.id === placeId);
+      const marker = place ? markerRefs.current[placeId] : null;
 
-  if (place && marker) {
-    map.flyTo([place.coords.lat, place.coords.lng], Math.max(map.getZoom(), 14), {
-      duration: 0.7,
-    });
-    marker.openPopup();
-  }
+      if (place && marker) {
+        map.flyTo(
+          [place.coords.lat, place.coords.lng],
+          Math.max(map.getZoom(), 14),
+          {
+            duration: 0.7,
+          }
+        );
+        marker.openPopup();
+      }
 
-  // очищаємо state
-  navigate(".", { replace: true, state: {} });
-},
-  // Відпрацює, коли зміниться щось із цього:
-  // -location.state - сюди прилітає placeId
-  // -map - об'єкт карти з useMap(), щоб викликати flyTo
-  // -navigate - для доступу до функції очистки state
-  [map, navigate, placeId])
+      // очищаємо state
+      navigate(".", { replace: true, state: {} });
+    },
+    // Відпрацює, коли зміниться щось із цього:
+    // -location.state - сюди прилітає placeId
+    // -map - об'єкт карти з useMap(), щоб викликати flyTo
+    // -navigate - для доступу до функції очистки state
+    [map, navigate, placeId]
+  );
 
   return (
-    <> 
+    <>
       {places.map((place) => {
         const icon = categoryIcons[place.category];
 
@@ -63,28 +74,41 @@ useEffect(() => {
             key={place.id}
             position={[place.coords.lat, place.coords.lng]}
             icon={icon}
-            ref={(instance) => {markerRefs.current[place.id] = instance}}
+            ref={(instance) => {
+              markerRefs.current[place.id] = instance;
+            }}
           >
             <Popup>
               <strong>{place.title}</strong>
               <br />
               {place.description}
               <div className={css.buttonWrap}>
-                <button
-                  onClick={() => removePlace(place.id)}
-                  >
-                    Видалити
-                  </button>
+
+                <button onClick={() => toggleFavorite(place.id)}>
+                  {place.isFavorite ? "★ У обраному" : "☆ В обране"}
+                </button>
+
+                <button onClick={() => setEditing(place)}>Редагувати</button>
+
+                <button onClick={() => setDeletingId(place.id)}>Видалити</button>
+                
               </div>
             </Popup>
           </Marker>
-        )
+        );
       })}
-    
+      {deletingId && (
+        <ConfirmModal
+          title='Видалити місце?'
+          message='Дію не можна буде скасувати'
+          confirmText='Видалити'
+          onConfirm={() => removePlace(deletingId)}
+          onClose={() => setDeletingId(null)}
+         />
+      )}
+      {editing && (
+        <EditPlaceModal place={editing} onClose={() => setEditing(null)} />
+      )}
     </>
-  )
+  );
 }
-
-
- 
-

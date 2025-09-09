@@ -4,6 +4,7 @@ import styles from './App.module.css'
 import MapPage from '../Map/MapPage'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ListPage from '@/pages/ListPage/ListPage'
+import FavoritesPage from '@/pages/FavoritesPage/FavoritesPage'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           
           <Route path='/map' element={<MapPage />} />
           <Route path='/list' element={<ListPage />} />
+          <Route path='/favorites' element={<FavoritesPage />} />
 
           <Route path='*' element={<Navigate to="/map" replace />} />
         </Routes>

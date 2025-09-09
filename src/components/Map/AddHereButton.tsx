@@ -1,8 +1,10 @@
 import { useMap } from "react-leaflet"
 import css from './AddHereButton.module.css'
+import type { AddProps } from "@/types";
 
 
-export default function AddHereButton({ onPick }: { onPick: (ll:{lat: number; lng: number})=> void }) {
+
+export default function AddHereButton({ onPick }: AddProps) {
     const map = useMap();
 
   return (

@@ -1,69 +1,76 @@
-# React + TypeScript + Vite
+Walk Kyiv- інтерактивний застосунок для дослідження Києва. 
+Зберігайте, переглядайте на мапі і у списку ваші улюблені місця.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Pet-project для практики React + TypeScript + Leaflet.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+✨ Функціонал:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Контекст (PlacesContext)
+    - єдине джерело даних для місць
+    - початкові seedPlaces + синхронізація з localStorage
+    - методи addPlace, editPlace, removePlace, resetToSeeds, toggleFavorite
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Мапа (MapPage)
+    - стартовий центр та зум
+    - категорійні іконки для маркерів
+    - попапи з описом та діями (Редагувати / Видалити / В обране)
+    - кнопка «+ Додати тут» (додає точку в центр карти)
+    - додавання по Shift+кліку на мапі    
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Список місць (ListPage)   
+    - відображення усіх місць (назва, опис, категорія)
+    - клік по картці → відкриття попапу на мапі
+    - кнопки Редагувати, Видалити, В обране
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Обране (FavoritesPage)
+    - збереження улюблених місць (isFavorite)
+    - сторінка /favorites зі списком обраних
+    - можливість прибрати з обраного
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Редагування місць
+    - модалка з попередньо заповненими полями
+    - збереження змін у контексті та localStorage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Підтвердження видалення 
+    - універсальна ConfirmModal
+    - працює і в списку, і в попапах на мапі 
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- UI модалки
+    - ModalAddPlace через createPortal
+    - закриття по Escape, кліку на бекдроп і кнопці закриття
+
+    
+
+🚀 Плановані фічі
+- Фільтри по категоріях (на мапі та у списку)
+- Пошук по назві/опису
+- Сортування (за рейтингом, датою додавання)
+- Редагування координат (перетягування маркера або поля у формі)
+- Превʼю маркера при додаванні (тимчасовий маркер іншого кольору)
+- Налаштування (темна тема, вибір мови)
+- Адаптивна верстка для мобільних і планшетів
+- Кнопка «Скинути до початкових місць»
+- Бекенд / синхронізація (планую Firebase)
+
+
+
+ 📦 Використані бібліотеки
+- React + TypeScript — основа застосунку
+- React Router DOM — маршрутизація між сторінками (/map, /list, /favorites)
+- React Leaflet + Leaflet — інтерактивна мапа, маркери, попапи
+- CSS Modules — ізоляція стилів для компонентів
+- localStorage API (вбудоване) — збереження стану між сесіями
+- createPortal (React) — для реалізації модалок поверх усього
+
+
+
+📂 Структура (у процесі)
+
+- src/context/ — контекст і хук usePlaces
+- src/data/ — початкові дані (seedPlaces)
+- src/components/ — багаторазові компоненти (Map, UI, Header, Footer, …)
+- src/pages/ — сторінки застосунку (MapPage, ListPage, FavoritesPage, …)
+- src/lib/ — утиліти та конфіги (наприклад, іконки для Leaflet)
+- src/types/ — глобальні типи (Place, Category, …)

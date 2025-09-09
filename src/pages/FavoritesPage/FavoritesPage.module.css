@@ -1,0 +1,41 @@
+.favPageWrap {
+  padding: 1rem;
+}
+
+.favPageList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.favPageItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #eb6a6a;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.favPageSpan {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.favPageBtnToggle {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+}
+
+.itemTitle {
+  margin: 0;
+}
+
+.itemDescr {
+  margin: 0.2rem 0 0 0;
+  color: #555;
+}

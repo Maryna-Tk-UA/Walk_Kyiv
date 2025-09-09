@@ -4,10 +4,11 @@
     background-color: rgba(0, 0, 0, 0.35);
     display: grid;
     place-items: center;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .modal {
+    position: relative;
     background-color: #fff;
     border-radius: 12px;
     padding: 1rem;
@@ -15,4 +16,28 @@
     width: 90%;
     max-width: 420px;
     box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+.closeBtn {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+  fill: #666;
+  transition: fill .2s ease;
+}
+
+.closeBtn:hover .closeIcon {
+  fill: #000;
 }

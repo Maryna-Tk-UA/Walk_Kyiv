@@ -46,6 +46,23 @@
     color: #777;
 }
 
+.btnEditPlace {
+       background-color: rgb(56, 56, 222);
+    color: #fff;
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btnFavPlace {
+           background-color: rgb(103, 222, 56);
+    color: #fff;
+    border: none;
+    padding: 0.35rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
 /* .nature {
     background-color: #3c833c;
 }

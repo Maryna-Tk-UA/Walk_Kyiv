@@ -1,7 +1,8 @@
+import type { AddProps } from "@/types";
 import { useMapEvents } from "react-leaflet";
 
 
-export default function MapPickClick({ onPick }: { onPick:(ll:{lat:number; lng:number})=>void }) {
+export default function MapPickClick({ onPick }: AddProps) {
     useMapEvents({
         click(e) {
             // shft + click

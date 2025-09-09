@@ -5,10 +5,13 @@ import TileLayerOSM from "./TileLayerOSM"
 import MapPickClick from "./MapPickClick";
 import AddHereButton from "./AddHereButton";
 import AddPlaceModal from "@/pages/AddPlace/AddPlaceModal";
+import type { Place } from "@/types";
+import EditPlaceModal from "@/pages/EditPlace/EditPlaceModal";
 
 
 export default function MapPage() {
   const [draftCoords, setDraftCoords] = useState<{lat: number; lng: number} | null>(null);
+  const [editing, setEditing] = useState<Place | null>(null)
 
     const center: [number, number] = [50.45, 30.52]
 
@@ -25,6 +28,9 @@ export default function MapPage() {
           coords={draftCoords}
           onClose={() => setDraftCoords(null)}
          />
+      )}
+      {editing && (
+        <EditPlaceModal place={editing} onClose={() => setEditing(null)} />
       )}
     </div>
   )

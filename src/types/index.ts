@@ -30,9 +30,19 @@ export interface Place {
     description?: string;  // опис місця
     images?: string[];
     rating?: number;
+    isFavorite?: boolean;
     accessible?: boolean;  // доступність для людей з інвалідністю
     createdAt: string;   // дата створення запису 
                         //  new Date().toISOString()
                         //  new Date() - поточний момент часу
                         // toISOString() - Це метод, який переводить дату у рядок у форматі ISO 8601 (стандартний міжнародний формат).
+}
+
+export interface LatLngProps {
+  lat: number;
+  lng: number;
+}
+
+export interface AddProps {
+  onPick: (ll: LatLngProps) => void;
 }

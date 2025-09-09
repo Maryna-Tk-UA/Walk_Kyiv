@@ -1,0 +1,23 @@
+.cofirmModalWrap {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.btnGroupWrap {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.btnCancel {
+    border: none;
+    border-radius: 8px;
+}
+
+.btnConfirm {
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.35rem 0.6rem;
+}

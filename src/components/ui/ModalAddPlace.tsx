@@ -30,6 +30,16 @@ export default function ModalAddPlace({ children, onClose, backdropClose = true 
         onClick={(e) => e.stopPropagation()}
         className={css.modal}
         >
+            <button
+          type="button"
+          className={css.closeBtn}
+          onClick={onClose}
+          aria-label="Закрити модалку"
+        >
+          <svg className={css.closeIcon}>
+            <use href="/icons/symbol-defs.svg#icon-close" /> 
+          </svg>
+        </button>
           {children}
         </div>
     </div>,

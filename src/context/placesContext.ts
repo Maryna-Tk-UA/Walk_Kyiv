@@ -7,6 +7,8 @@ interface Context {
     addPlace: (place: Place) => void;
     removePlace: (id: string) => void;
     resetToSeeds?: () => void;
+    editPlace: (id: string, updates: Partial<Place>) => void;
+    toggleFavorite: (id: string) => void;
 }
 
 // createContext - функція у React, яка створює контекст(спосіб передавати
